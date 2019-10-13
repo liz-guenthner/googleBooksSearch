@@ -19,7 +19,8 @@ class Search extends Component {
 
   // When the component mounts, get a list of all available base breeds and update this.state.breeds
   componentDidMount() {
-    API.getBaseBooksList()
+    // API.getBaseBooksList()
+    API.getBooks()
       .then(res => this.setState({ books: res.data }))
       .catch(err => console.log(err));
   }
@@ -42,7 +43,7 @@ class Search extends Component {
   render() {
     return (
       <div>
-        <Hero backgroundImage="https://i.imgur.com/qkdpN.jpg">
+        <Hero backgroundImage="http://bepropertyinvestors.com/wp-content/uploads/2019/10/books.jpg">
           <h1>Google Books Search</h1>
           <h2>Pick a book...any book</h2>
         </Hero>
