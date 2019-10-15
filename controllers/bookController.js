@@ -11,7 +11,7 @@ module.exports = {
             // decending date order
             .sort({date: -1})
             // return (new) list of books in object
-            .then(dbModel => res.json(dbModel))
+            .then(dbBook => res.json(dbBook))
             // if error caught, send status "unprocessable entity"
             .catch(err => res.status(422).json(err));
     },
@@ -21,7 +21,7 @@ module.exports = {
             // look for based on id parameter in uri
             .findById(req.params.id)
             // return (new) list of books in object
-            .then(dbModel => res.json(dbModel))
+            .then(dbBook => res.json(dbBook))
             // if error caught, send status "unprocessable entity"
             .catch(err => res.status(422).json(err));
     },
@@ -31,7 +31,7 @@ module.exports = {
             // create from json object body
             .create(req.body)
             // return (new) list of books in object
-            .then(dbModel => res.json(dbModel))
+            .then(dbBook => res.json(dbBook))
             // if error caught, send status "unprocessable entity"
             .catch(err => res.status(422).json(err));
     },
@@ -39,9 +39,15 @@ module.exports = {
         // update pre-existing book in db
         db.Book
             // find a book in db and update based on id parameter in uri
-            .findOneAndUpdate({ _id: req.params.id })
+            .findOneAndUpdate({ 
+                _id: req.params.id
+            }, {
+                $set: req.body
+            }, { 
+                new: true
+             })
             // return (new) list of books in object
-            .then(dbModel => res.json(dbModel))
+            .then(dbBook => res.json(dbBook))
             // if error caught, send status "unprocessable entity"
             .catch(err => res.status(422).json(err));
     },
@@ -51,9 +57,9 @@ module.exports = {
             // find a book in db based on id parameter in uri
             .findById({ _id: req.params.id })
             // remove book with id above
-            .then(dbModel => dbModel.remove())
+            .then(dbBook => dbBook.remove())
             // return (new) list of books in object
-            .then(dbModel => res.json(dbModel))
+            .then(dbBook => res.json(dbBook))
             // if error caught, send status "unprocessable entity"
             .catch(err => res.status(422).json(err));
     }
