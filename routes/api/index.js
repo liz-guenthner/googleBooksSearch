@@ -7,4 +7,10 @@ router.use("/books", bookRoutes);
 // Google routes
 router.use("/google", googleRoutes);
 
+// Send every other request to the React app
+// Define any API routes before this runs
+app.get( function(req, res) {
+  res.sendFile(path.join(__dirname, "./client/build/index.html"));
+});
+
 module.exports = router;

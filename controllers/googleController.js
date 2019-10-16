@@ -21,9 +21,9 @@ module.exports = {
           res.json(books);
         }
       })
-      .catch(function(err) {
-        // If error inserting books, return message
-        res.json({ message: "Error scraping book(s)!" });
-      });
+      // .catch(function(err) {
+      //   // If error inserting books, return message
+      //   res.json({ message: "Scrape complete!" });
+      // });
   }
 };

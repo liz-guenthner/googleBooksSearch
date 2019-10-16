@@ -48,9 +48,8 @@ function App() {
         <Navbar />
         <Wrapper>
           <Route exact path="/" component={Search} />
-          <Route exact path="/saved" component={Saved} />
-          {/* <Route exact path="/discover" component={Discover} /> */}
-          <Route exact path="/search" component={Search} />
+          {/* <Route exact path="/saved" component={Saved} />
+          <Route exact path="/search" component={Search} /> */}
         </Wrapper>
         <Footer />
       </div>
