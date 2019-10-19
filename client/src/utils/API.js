@@ -1,35 +1,26 @@
 import axios from "axios";
 
-// api key for google books
-//AIzaSyB-zDnrKRygNuRVj_FPZcRO9AVtEZGlBZ8
-
 export default {
   // Gets all books
-  getBooks: function() {
-    return axios.get("/api/books");
-  },
-  // Gets the book with the given id
-  getBook: function(id) {
-    return axios.get("/api/books/" + id);
-  },
-  // Deletes the book with the given id
-  deleteBook: function(id) {
-    return axios.delete("/api/books/" + id);
-  },
-  // Saves a book to the database
-  saveBook: function(bookData) {
-    return axios.post("/api/books", bookData);
+  getAllBooks: function(search) {
+    search = 'cats';
+    const booksArray = [];
+    return axios.get('https://www.googleapis.com/books/v1/volumes?q='+ search + '&printType=books&_limit=10')
+    .then(function(response){
+      booksArray.push(response.data);
+      return booksArray;
+    });
   }
+  // Gets the book with the given id
+  // getBook: function(id) {
+  //   return axios.get("/api/books/" + id);
+  // },
+  // // Deletes the book with the given id
+  // deleteBook: function(id) {
+  //   return axios.delete("/api/books/" + id);
+  // },
+  // // Saves a book to the database
+  // saveBook: function(bookData) {
+  //   return axios.post("/api/books", bookData);
+  // }
 };
-
-// export default {
-//   getRandomDog: function() {
-//     return axios.get("https://dog.ceo/api/breeds/image/random");
-//   },
-//   getDogsOfBreed: function(breed) {
-//     return axios.get("https://dog.ceo/api/breed/" + breed + "/images");
-//   },
-//   getBaseBreedsList: function() {
-//     return axios.get("https://dog.ceo/api/breeds/list");
-//   }
-// };

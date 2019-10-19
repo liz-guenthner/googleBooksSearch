@@ -6,24 +6,32 @@ import SearchForm from "../components/SearchForm";
 import SearchResults from "../components/SearchResults";
 import Row from "../components/Row";
 import Col from "../components/Col";
-import Card from "../components/Card";
+// import { List, ListItem } from "../components/List";
+// import { Link } from "react-router-dom";
+// import DeleteBtn from "../components/DeleteBtn";
 
 class Search extends Component {
   state = {
     search: "",
     books: [],
     results: [],
-    error: "",
-    image: ""
+    error: ""
   };
 
-  // When the component mounts, get a list of all available base breeds and update this.state.breeds
   componentDidMount() {
-    // API.getBaseBooksList()
-    API.getBooks()
-      .then(res => this.setState({ books: res.data }))
-      .catch(err => console.log(err));
+    this.loadBooks();
   }
+
+  // When the component mounts, get a list of all available books
+  loadBooks = () => {
+    API.getAllBooks()
+      .then(res =>
+        this.setState({
+          books: res.data
+        })
+      )
+      .catch(err => console.log(err));
+  };
 
   handleInputChange = event => {
     this.setState({ search: event.target.value });
@@ -31,7 +39,7 @@ class Search extends Component {
 
   handleFormSubmit = event => {
     event.preventDefault();
-    API.getBooks(this.state.search)
+    API.getAllBooks(this.state.search)
       .then(res => {
         if (res.data.status === "error") {
           throw new Error(res.data.message);
@@ -43,14 +51,14 @@ class Search extends Component {
   render() {
     return (
       <div>
-        <Hero backgroundImage="http://bepropertyinvestors.com/wp-content/uploads/2019/10/books.jpg">
+        <Hero backgroundImage="/images/books.jpg">
           <h1>Google Books Search</h1>
           <h2>Pick a book...any book</h2>
         </Hero>
         <Container style={{ minHeight: "80%" }}>
           <Row>
             <Col size="md-12">
-              <h1>Enter a book to begin!</h1>
+              <h3>Enter a book to begin!</h3>
             </Col>
           </Row>
           <Row>
@@ -61,9 +69,33 @@ class Search extends Component {
                 books={this.state.books}
               />
               <SearchResults results={this.state.results} />
-              <Card image={this.state.image} handleBtnClick={this.handleBtnClick} />
             </Col>
           </Row>
+          {/* <Row>
+            <Col size="md-6 sm-12">
+              {this.state.books.length ? (
+                <List>
+                  {this.state.books.map(book => (
+                    <ListItem key={book._id}>
+                      <img alt={book.volumeInfo.title} src={book.volumeInfo.imageLinks.thumbnail}/>
+                      <div>{book.volumeInfo.title}</div>
+                      <div>{book.volumeInfo.authors}</div>
+                      <div>{book.volumeInfo.description}</div>
+
+                      <Link to={book.volumeInfo.previewLink}>
+                        <ViewBtn />
+                      </Link>
+                      
+                      <DeleteBtn onClick={() => this.deleteBook(book._id)} />
+
+                    </ListItem>
+                  ))}
+                </List>
+              ) : (
+                <h3>No Results to Display</h3>
+              )}
+            </Col>
+          </Row> */}
         </Container>
       </div>
     );

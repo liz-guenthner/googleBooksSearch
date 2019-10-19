@@ -1,3 +1,29 @@
 nav.navbar.navbar-default {
     margin-bottom: 0;
 }
+
+li.nav-item a {
+    color: rgba(0,0,0,.6);
+}
+li.nav-item a:hover {
+    color: rgba(0,0,0,.95);
+    text-decoration:none;
+}
+
+li.nav-item a:active,
+li.nav-item a:focus {
+    color: rgba(0,0,0,.95);
+}
+
+li.nav-item a:first-child {
+    margin-right: 15px;
+}
+
+.navbar-brand a {
+    margin-right: 15px;
+    color: rgba(0,0,0,.9);
+}
+
+.navbar-brand a:hover {
+    text-decoration:none;
+}

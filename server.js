@@ -1,4 +1,4 @@
-// express handles routes
+// express = middleware handles routes
 const express = require("express");
 // path handles returning directory names/paths
 const path = require("path");
@@ -15,6 +15,7 @@ const PORT = process.env.PORT || 3001;
 // Add routes, both API and view
 app.use(routes);
 
+
 // Define middleware here
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -23,9 +24,28 @@ if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
 }
 
-// Connect to the Mongo DB
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/googlebookssearch");
 
+// Send every other request to the React app
+// Define any API routes before this runs
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "./client/build/index.html"));
+});
+
+// trying something here
+app.use(function(req, res, next){
+  console.log("first piece ran");
+  next();
+});
+
+app.use("/different", function(req, res, next){
+  console.log("second piece ran");
+  next();
+});
+
+// Connect to the Mongo DB
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/googlebooksdb", { useNewUrlParser: true });
+
+// second parameter is a callback function with a console message
 app.listen(PORT, () => {
   console.log(`🌎 ==> API server now on port ${PORT}!`);
 });

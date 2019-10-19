@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "description": "Google Books Search",
   "private": true,
-  "proxy": "http://localhost:3001/",
+  "proxy": "http://localhost:3000/",
   "dependencies": {
     "react": "^16.10.2",
     "react-dom": "^16.10.2",

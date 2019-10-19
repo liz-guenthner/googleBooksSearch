@@ -46,6 +46,8 @@ module.exports = {
             }, { 
                 new: true
              })
+            //.findOneAndUpdate({ _id: req.params.id }, req.body)???
+
             // return (new) list of books in object
             .then(dbBook => res.json(dbBook))
             // if error caught, send status "unprocessable entity"
