@@ -27,6 +27,7 @@ module.exports = {
     },
     create: function(req, res) {
         // create new book instance
+        console.log(req.body);
         db.Book
             // create from json object body
             .create(req.body)
