@@ -6,14 +6,13 @@ import SearchForm from "../components/SearchForm";
 import SearchResults from "../components/SearchResults";
 import Row from "../components/Row";
 import Col from "../components/Col";
-// import { List, ListItem } from "../components/List";
-// import { Link } from "react-router-dom";
-// import DeleteBtn from "../components/DeleteBtn";
+import { BookList, BookListItem } from "./components/BookList";
+
 
 class Search extends Component {
   state = {
-    search: "",
     books: [],
+    booksSearch: "",
     results: [],
     error: ""
   };
@@ -25,28 +24,25 @@ class Search extends Component {
   // When the component mounts, get a list of all available books
   loadBooks = () => {
     API.getAllBooks()
-      .then(res =>
-        this.setState({
-          books: res.data
-        })
-      )
+      .then(res => this.setState({ books: res.data}))
       .catch(err => console.log(err));
   };
 
   handleInputChange = event => {
-    this.setState({ search: event.target.value });
+    const { name, value } = event.target;
+    this.setState({ [name]: value });
   };
 
   handleFormSubmit = event => {
     event.preventDefault();
-    API.getAllBooks(this.state.search)
+    API.getBooks(this.state.booksSearch)
       .then(res => {
         if (res.data.status === "error") {
           throw new Error(res.data.message);
         }
-        this.setState({ results: res.data.message, error: "" });
+        this.setState({ books: res.data });
       })
-      .catch(err => this.setState({ error: err.message }));
+      .catch(err => console.log(err));
   };
   render() {
     return (
@@ -71,31 +67,28 @@ class Search extends Component {
               <SearchResults results={this.state.results} />
             </Col>
           </Row>
-          {/* <Row>
+          <Row>
             <Col size="md-6 sm-12">
-              {this.state.books.length ? (
-                <List>
-                  {this.state.books.map(book => (
-                    <ListItem key={book._id}>
-                      <img alt={book.volumeInfo.title} src={book.volumeInfo.imageLinks.thumbnail}/>
-                      <div>{book.volumeInfo.title}</div>
-                      <div>{book.volumeInfo.authors}</div>
-                      <div>{book.volumeInfo.description}</div>
-
-                      <Link to={book.volumeInfo.previewLink}>
-                        <ViewBtn />
-                      </Link>
-                      
-                      <DeleteBtn onClick={() => this.deleteBook(book._id)} />
-
-                    </ListItem>
-                  ))}
-                </List>
+              {!this.state.books.length ? (
+                <div></div>
               ) : (
-                <h3>No Results to Display</h3>
+                <BookList>
+                  {this.state.books.map(book => {
+                    return (
+                      <BookListItem
+                        key={book._id}
+                        title={book.volumeInfo.title}
+                        authors={book.volumeInfo.authors}
+                        description={book.volumeInfo.description}
+                        image={book.volumeInfo.imageLinks.thumbnail}
+                        link={book.volumeInfo.previewLink}
+                      />
+                    );
+                  })}
+                </BookList>
               )}
             </Col>
-          </Row> */}
+          </Row>
         </Container>
       </div>
     );

@@ -12,34 +12,21 @@ const app = express();
 // declare port for backend server
 const PORT = process.env.PORT || 3001;
 
-// Add routes, both API and view
-app.use(routes);
-
-
 // Define middleware here
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+// Add routes, both API and view
+app.use(routes);
+
 // Serve up static assets (usually on heroku)
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
 }
 
-
 // Send every other request to the React app
 // Define any API routes before this runs
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "./client/build/index.html"));
-});
-
-// trying something here
-app.use(function(req, res, next){
-  console.log("first piece ran");
-  next();
-});
-
-app.use("/different", function(req, res, next){
-  console.log("second piece ran");
-  next();
 });
 
 // Connect to the Mongo DB

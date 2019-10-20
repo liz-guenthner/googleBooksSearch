@@ -10,7 +10,7 @@ function SearchForm(props) {
         <input
           value={props.search}
           onChange={props.handleInputChange}
-          name="book"
+          name="booksSearch"
           list="books"
           type="search"
           className="form-control"
