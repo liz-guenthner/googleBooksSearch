@@ -1,11 +1,9 @@
 const router = require("express").Router();
+const googleController = require("../../controllers/googleController.js");
 
-// Matches with "/api/books/googleSearch/"
-router.get("/googleSearch", (req, res) => {
-    axios
-      .get('https://www.googleapis.com/books/v1/volumes?q='+ { params: req.query } + '&printType=books&_limit=10')
-      .then(({ data: { results } }) => res.json(results))
-      .catch(err => res.status(422).json(err));
-  });
+// Matches with "/api/books/googleSearch"
+router.route("/googleSearch")
+  .get(googleController.getAllBooks);
 
-  module.exports = router;
+
+module.exports = router;
