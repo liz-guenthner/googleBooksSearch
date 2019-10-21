@@ -12,9 +12,5 @@ router.route("/:id")
   .put(bookController.update)
   .delete(bookController.remove);
 
-// Matches with "/api/books/search"
-router.route("/search")
-  .get(bookController.search);
-
 
 module.exports = router;
