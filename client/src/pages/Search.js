@@ -6,7 +6,7 @@ import SearchForm from "../components/SearchForm";
 import SearchResults from "../components/SearchResults";
 import Row from "../components/Row";
 import Col from "../components/Col";
-import { BookList, BookListItem } from "./components/BookList";
+// import { BookList, BookListItem } from "./components/BookList";
 
 
 class Search extends Component {
@@ -69,7 +69,7 @@ class Search extends Component {
           </Row>
           <Row>
             <Col size="md-6 sm-12">
-              {!this.state.books.length ? (
+              {/* {!this.state.books.length ? (
                 <div></div>
               ) : (
                 <BookList>
@@ -86,7 +86,7 @@ class Search extends Component {
                     );
                   })}
                 </BookList>
-              )}
+              )} */}
             </Col>
           </Row>
         </Container>
