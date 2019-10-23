@@ -3,18 +3,16 @@ import API from "../utils/API";
 import Hero from "../components/Hero";
 import Container from "../components/Container";
 import SearchForm from "../components/SearchForm";
-import SearchResults from "../components/SearchResults";
 import Row from "../components/Row";
 import Col from "../components/Col";
-// import { BookList, BookListItem } from "./components/BookList";
+import BookList from "../components/BookList";
+import BookListItem from "../components/BookListItem";
 
 
 class Search extends Component {
   state = {
     books: [],
-    booksSearch: "",
-    results: [],
-    error: ""
+    booksSearch: ""
   };
 
   componentDidMount() {
@@ -23,7 +21,7 @@ class Search extends Component {
 
   // When the component mounts, get a list of all available books
   loadBooks = () => {
-    API.getAllBooks()
+    API.getSavedBooks()
       .then(res => this.setState({ books: res.data}))
       .catch(err => console.log(err));
   };
@@ -35,15 +33,33 @@ class Search extends Component {
 
   handleFormSubmit = event => {
     event.preventDefault();
-    API.getBooks(this.state.booksSearch)
+
+    API.getAllBooks(this.state.booksSearch)
       .then(res => {
         if (res.data.status === "error") {
           throw new Error(res.data.message);
         }
         this.setState({ books: res.data });
       })
-      .catch(err => console.log(err));
+      .catch((err) => {
+        this.setState({ books: [] });
+      });
   };
+
+  handleSaveBook = id => {
+    const book = this.state.books.find(
+      book => book.id === id
+    );
+
+    API.saveBook({
+      title: book.volumeInfo.title,
+      authors: book.volumeInfo.authors,
+      description: book.volumeInfo.description,
+      image: book.volumeInfo.imageLinks.thumbnail,
+      link: book.volumeInfo.previewLink
+    }).then(() => this.getBooks());
+  }
+
   render() {
     return (
       <div>
@@ -62,14 +78,13 @@ class Search extends Component {
               <SearchForm
                 handleFormSubmit={this.handleFormSubmit}
                 handleInputChange={this.handleInputChange}
-                books={this.state.books}
+                booksSearch={this.state.booksSearch}
               />
-              <SearchResults results={this.state.results} />
             </Col>
           </Row>
           <Row>
             <Col size="md-6 sm-12">
-              {/* {!this.state.books.length ? (
+              {!this.state.books.length ? (
                 <div></div>
               ) : (
                 <BookList>
@@ -86,7 +101,7 @@ class Search extends Component {
                     );
                   })}
                 </BookList>
-              )} */}
+              )}
             </Col>
           </Row>
         </Container>

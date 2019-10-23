@@ -4,8 +4,8 @@ import Hero from "../components/Hero";
 import Container from "../components/Container";
 import Row from "../components/Row";
 import Col from "../components/Col";
-// import { List, ListItem } from "../components/List";
-// import { Link } from "react-router-dom";
+import BookList from "../components/BookList";
+import BookListItem from "../components/BookListItem";
 // import DeleteBtn from "../components/DeleteBtn";
 
 class Saved extends Component {
@@ -16,12 +16,12 @@ class Saved extends Component {
   };
 
   componentDidMount() {
-    this.loadBooks();
+    this.getSavedBooks();
   }
 
   // When the component mounts, get a list of all available books
-  loadBooks = () => {
-    API.getAllBooks()
+  getSavedBooks = () => {
+    API.getSavedBooks()
       .then(res =>
         this.setState({
           books: res.data
@@ -30,21 +30,13 @@ class Saved extends Component {
       .catch(err => console.log(err));
   };
 
-  handleInputChange = event => {
-    this.setState({ search: event.target.value });
+  handleDeleteBook = id => {
+    const bookObjects = this.state.books;
+    API.deleteBook(id)
+    .then(res => this.getSavedBooks())
+    .then(res => this.setState( {books: bookObjects }));
   };
 
-  handleFormSubmit = event => {
-    event.preventDefault();
-    API.getAllBooks(this.state.search)
-      .then(res => {
-        if (res.data.status === "error") {
-          throw new Error(res.data.message);
-        }
-        this.setState({ results: res.data.message, error: "" });
-      })
-      .catch(err => this.setState({ error: err.message }));
-  };
   render() {
     return (
       <div>
@@ -58,41 +50,28 @@ class Saved extends Component {
               <h3>Here are your saved books!</h3>
             </Col>
           </Row>
-          {/* <Row>
-            <Col size="md-12">
-              <SearchForm
-                handleFormSubmit={this.handleFormSubmit}
-                handleInputChange={this.handleInputChange}
-                books={this.state.books}
-              />
-              <SearchResults results={this.state.results} />
-            </Col>
-          </Row> */}
           <Row>
-          <Col size="md-6 sm-12">
-            {/* {this.state.books.length ? (
-              <List>
-                {this.state.books.map(book => (
-                  <ListItem key={book._id}>
-                    <img alt={book.volumeInfo.title} src={book.volumeInfo.imageLinks.thumbnail}/>
-                    <div>{book.volumeInfo.title}</div>
-                    <div>{book.volumeInfo.authors}</div>
-                    <div>{book.volumeInfo.description}</div>
-
-                    <Link to={book.volumeInfo.previewLink}>
-                      <ViewBtn />
-                    </Link>
-                    
-                    <DeleteBtn onClick={() => this.deleteBook(book._id)} />
-
-                  </ListItem>
-                ))}
-              </List>
-            ) : (
-              <h3>No Results to Display</h3>
-            )} */}
-          </Col>
-        </Row>
+            <Col size="md-6 sm-12">
+              {!this.state.books.length ? (
+                <BookList>
+                  {this.state.books.map(book => {
+                    return (
+                      <BookListItem
+                        key={book._id}
+                        title={book.volumeInfo.title}
+                        authors={book.volumeInfo.authors}
+                        description={book.volumeInfo.description}
+                        image={book.volumeInfo.imageLinks.thumbnail}
+                        link={book.volumeInfo.previewLink}
+                      />
+                    );
+                  })}
+                </BookList>
+              ) : (
+                <div>No saved books!</div>
+              )}
+            </Col>
+          </Row>
         </Container>
       </div>
     );

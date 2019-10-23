@@ -5,6 +5,7 @@
   "private": true,
   "proxy": "http://localhost:3000/",
   "dependencies": {
+    "axios": "^0.18.0",
     "react": "^16.10.2",
     "react-dom": "^16.10.2",
     "react-router-dom": "^5.1.2",

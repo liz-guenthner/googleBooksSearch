@@ -27,7 +27,6 @@ module.exports = {
     },
     create: function(req, res) {
         // create new book instance
-        console.log(req.body);
         db.Book
             // create from json object body
             .create(req.body)
@@ -42,13 +41,7 @@ module.exports = {
             // find a book in db and update based on id parameter in uri
             .findOneAndUpdate({ 
                 _id: req.params.id
-            }, {
-                $set: req.body
-            }, { 
-                new: true
-             })
-            //.findOneAndUpdate({ _id: req.params.id }, req.body)???
-
+            },req.body)
             // return (new) list of books in object
             .then(dbBook => res.json(dbBook))
             // if error caught, send status "unprocessable entity"

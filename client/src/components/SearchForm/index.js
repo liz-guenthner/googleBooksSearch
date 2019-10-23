@@ -1,28 +1,22 @@
 import React from "react";
 import "./style.css";
 
-// Using the datalist element we can create autofill suggestions based on the props.books array
-function SearchForm(props) {
+
+function SearchForm(booksSearch, handleInputChange, handleFormSubmit) {
   return (
     <form className="search">
       <div className="form-group">
         <label htmlFor="book">Book Name:</label>
         <input
-          value={props.search}
-          onChange={props.handleInputChange}
+          value={booksSearch}
+          onChange={handleInputChange}
           name="booksSearch"
-          list="books"
-          type="search"
+          type="text"
           className="form-control"
           placeholder="Type in a book name"
           id="book"
         />
-        {/* <datalist id="books">
-          {props.books.map(book => (
-            <option value={book} key={book} />
-          ))}
-        </datalist> */}
-        <button type="submit" onClick={props.handleFormSubmit} className="btn btn-success">
+        <button type="submit" onClick={handleFormSubmit} className="btn btn-success">
           Search
         </button>
       </div>
