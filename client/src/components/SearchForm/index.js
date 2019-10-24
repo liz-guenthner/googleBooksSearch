@@ -2,7 +2,7 @@ import React from "react";
 import "./style.css";
 
 
-function SearchForm(booksSearch, handleInputChange, handleFormSubmit) {
+function SearchForm({booksSearch, handleInputChange, handleFormSubmit}) {
   return (
     <form className="search">
       <div className="form-group">

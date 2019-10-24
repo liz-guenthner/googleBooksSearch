@@ -3,7 +3,7 @@ import API from "../utils/API";
 import Hero from "../components/Hero";
 import Container from "../components/Container";
 import Row from "../components/Row";
-import Col from "../components/Col";
+// import Col from "../components/Col";
 import BookList from "../components/BookList";
 import BookListItem from "../components/BookListItem";
 // import DeleteBtn from "../components/DeleteBtn";
@@ -11,7 +11,6 @@ import BookListItem from "../components/BookListItem";
 class Saved extends Component {
   state = {
     books: [],
-    // results: [],
     error: ""
   };
 
@@ -46,23 +45,23 @@ class Saved extends Component {
         </Hero>
         <Container style={{ minHeight: "80%" }}>
           <Row>
-            <Col size="md-12">
+            {/* <Col size="md-12"> */}
               <h3>Here are your saved books!</h3>
-            </Col>
+            {/* </Col> */}
           </Row>
           <Row>
-            <Col size="md-6 sm-12">
+            {/* <Col size="md-6 sm-12"> */}
               {!this.state.books.length ? (
                 <BookList>
                   {this.state.books.map(book => {
                     return (
                       <BookListItem
-                        key={book._id}
-                        title={book.volumeInfo.title}
-                        authors={book.volumeInfo.authors}
-                        description={book.volumeInfo.description}
-                        image={book.volumeInfo.imageLinks.thumbnail}
-                        link={book.volumeInfo.previewLink}
+                      key={book._id}
+                      title={book.title}
+                      authors={book.authors}
+                      description={book.description}
+                      image={book.image}
+                      link={book.link}
                       />
                     );
                   })}
@@ -70,7 +69,7 @@ class Saved extends Component {
               ) : (
                 <div>No saved books!</div>
               )}
-            </Col>
+            {/* </Col> */}
           </Row>
         </Container>
       </div>

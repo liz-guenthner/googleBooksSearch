@@ -3,7 +3,7 @@ const googleController = require("../../controllers/googleController.js");
 
 // Matches with "/api/google/googleSearch"
 router.route("/googleSearch")
-  .get(googleController.getAllBooks);
+  .get(googleController.getSearchedBooks);
 
 
 module.exports = router;
