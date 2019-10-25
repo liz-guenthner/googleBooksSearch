@@ -7,3 +7,11 @@ body {
 h3 {
   margin-top:50px;
 }
+
+ul.list-group {
+  width:100%;
+}
+
+li.list-group-item {
+  margin: 20px 0;
+}

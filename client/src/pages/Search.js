@@ -4,7 +4,6 @@ import Hero from "../components/Hero";
 import Container from "../components/Container";
 import SearchForm from "../components/SearchForm";
 import Row from "../components/Row";
-// import Col from "../components/Col";
 import BookList from "../components/BookList";
 import BookListItem from "../components/BookListItem";
 
@@ -71,40 +70,35 @@ class Search extends Component {
         </Hero>
         <Container style={{ minHeight: "80%" }}>
           <Row>
-            {/* <Col size="md-12"> */}
-              <h3>Enter a book to begin!</h3>
-            {/* </Col> */}
+            <h3>Enter a book to begin!</h3>
+
           </Row>
           <Row>
-            {/* <Col size="md-12"> */}
-              <SearchForm
-                handleFormSubmit={this.handleFormSubmit}
-                handleInputChange={this.handleInputChange}
-                booksSearch={this.state.booksSearch}
-              />
-            {/* </Col> */}
+            <SearchForm
+              handleFormSubmit={this.handleFormSubmit}
+              handleInputChange={this.handleInputChange}
+              booksSearch={this.state.booksSearch}
+            />
           </Row>
           <Row>
-            {/* <Col size="md-6 sm-12"> */}
-              {!this.state.books.length ? (
-                <div></div>
-              ) : (
-                <BookList>
-                  {this.state.books.map(book => {
-                    return (
-                      <BookListItem
-                        key={book.id}
-                        title={book.title}
-                        authors={book.authors}
-                        description={book.description}
-                        image={book.image}
-                        link={book.link}
-                      />
-                    );
-                  })}
-                </BookList>
-              )}
-            {/* </Col> */}
+            {!this.state.books.length ? (
+              <div></div>
+            ) : (
+              <BookList>
+                {this.state.books.map(book => {
+                  return (
+                    <BookListItem
+                      key={book.id}
+                      title={book.title}
+                      authors={book.authors}
+                      description={book.description}
+                      image={book.image}
+                      link={book.link}
+                    />
+                  );
+                })}
+              </BookList>
+            )}
           </Row>
         </Container>
       </div>

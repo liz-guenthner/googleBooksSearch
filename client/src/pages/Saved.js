@@ -3,7 +3,6 @@ import API from "../utils/API";
 import Hero from "../components/Hero";
 import Container from "../components/Container";
 import Row from "../components/Row";
-// import Col from "../components/Col";
 import BookList from "../components/BookList";
 import BookListItem from "../components/BookListItem";
 // import DeleteBtn from "../components/DeleteBtn";
@@ -37,6 +36,7 @@ class Saved extends Component {
   };
 
   render() {
+
     return (
       <div>
         <Hero backgroundImage="/images/books.jpg">
@@ -45,31 +45,27 @@ class Saved extends Component {
         </Hero>
         <Container style={{ minHeight: "80%" }}>
           <Row>
-            {/* <Col size="md-12"> */}
-              <h3>Here are your saved books!</h3>
-            {/* </Col> */}
+            <h3>Here are your saved books!</h3>
           </Row>
           <Row>
-            {/* <Col size="md-6 sm-12"> */}
-              {!this.state.books.length ? (
-                <BookList>
-                  {this.state.books.map(book => {
-                    return (
-                      <BookListItem
-                      key={book._id}
-                      title={book.title}
-                      authors={book.authors}
-                      description={book.description}
-                      image={book.image}
-                      link={book.link}
-                      />
-                    );
-                  })}
-                </BookList>
-              ) : (
-                <div>No saved books!</div>
-              )}
-            {/* </Col> */}
+            {!this.state.books.length ? (
+              <BookList>
+                {this.state.books.map(book => {
+                  return (
+                    <BookListItem
+                    key={book.id}
+                    title={book.title}
+                    authors={book.authors}
+                    description={book.description}
+                    image={book.image}
+                    link={book.link}
+                    />
+                  );
+                })}
+              </BookList>
+            ) : (
+              <div>No saved books!</div>
+            )}
           </Row>
         </Container>
       </div>
