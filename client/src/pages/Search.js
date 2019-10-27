@@ -14,17 +14,6 @@ class Search extends Component {
     booksSearch: ""
   };
 
-  // componentDidMount() {
-  //   this.loadBooks();
-  // }
-
-  // When the component mounts, get a list of all available books
-  // loadBooks = () => {
-  //   API.getSavedBooks()
-  //     .then(res => this.setState({ books: res.data }))
-  //     .catch(err => console.log(err));
-  // };
-
   handleInputChange = event => {
     const { name, value } = event.target;
     this.setState({ [name]: value });
