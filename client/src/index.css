@@ -15,3 +15,18 @@ ul.list-group {
 li.list-group-item {
   margin: 20px 0;
 }
+
+.save-button {
+  float: right;
+  color: #ffffff;
+  background-color: #28a745;
+  padding: .375rem .75rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  border-radius: .25rem;
+}
+.save-button:hover {
+  filter: brightness(80%);
+  text-decoration: none;
+  color: #ffffff;
+}

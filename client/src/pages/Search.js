@@ -47,19 +47,20 @@ class Search extends Component {
       });
   };
 
-  // handleSaveBook = id => {
-  //   const book = this.state.books.find(
-  //     book => book.id === id
-  //   );
+  handleSaveBook = id => {
+    const book = this.state.books.find(
+      book => book.id === id
+    );
 
-  //   API.saveBook({
-  //     title: book.volumeInfo.title,
-  //     authors: book.volumeInfo.authors,
-  //     description: book.volumeInfo.description,
-  //     image: book.volumeInfo.imageLinks.thumbnail,
-  //     link: book.volumeInfo.previewLink
-  //   }).then(() => this.getBooks());
-  // }
+    API.saveBook({
+      id: book.id,
+      title: book.volumeInfo.title,
+      authors: book.volumeInfo.authors,
+      description: book.volumeInfo.description,
+      image: book.volumeInfo.imageLinks.thumbnail,
+      link: book.volumeInfo.previewLink
+    }).then(() => this.getBooks());
+  }
 
   render() {
     return (
@@ -94,6 +95,8 @@ class Search extends Component {
                       description={book.description}
                       image={book.image}
                       link={book.link}
+                      Button={() => (<button onClick={() => this.handleSaveBook(book.id)}
+                      className="btn save-button">Save</button>)}
                     />
                   );
                 })}

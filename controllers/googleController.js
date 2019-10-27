@@ -5,7 +5,6 @@ const axios = require("axios");
 
 module.exports = {
     getSearchedBooks: function(req, res) {
-        console.log(req.params);
         // axios call to find all books in google books search using parameter in query
         const { params } = req;
         axios
@@ -19,7 +18,6 @@ module.exports = {
             )
             .map(result => {
                 return {
-                    // key={id}
                     title: result.volumeInfo.title,
                     authors: result.volumeInfo.authors,
                     description: result.volumeInfo.description,

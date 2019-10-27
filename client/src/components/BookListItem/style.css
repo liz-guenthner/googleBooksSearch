@@ -1,0 +1,35 @@
+.book-headers {
+    width: 50%;
+    margin-bottom: 20px;
+}
+.book-headers span {
+    font-weight: bold;
+}
+.book-headers p {
+    margin:0;
+}
+.book-buttons {
+    width: 50%;
+}
+.view-link {
+    float: right;
+    color: #ffffff;
+    background-color: blue;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: .25rem;
+    margin-right: 15px;
+}
+.view-link:hover {
+    filter: brightness(80%);
+    text-decoration: none;
+    color: #ffffff;
+}
+.book-data span {
+    font-weight: bold;
+}
+.book-image {
+    float: left;
+    margin: 0 40px 10px 0;
+}
