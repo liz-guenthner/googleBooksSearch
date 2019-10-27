@@ -28,6 +28,7 @@ class Search extends Component {
           throw new Error(res.data.message);
         }
         this.setState({ books: res.data });
+        console.log(res.data);
       })
       .catch((err) => {
         this.setState({ 
@@ -36,13 +37,13 @@ class Search extends Component {
       });
   };
 
-  handleSaveBook = id => {
+  handleSaveBook = googleKey => {
+    console.log(googleKey);
     const book = this.state.books.find(
-      book => book.id === id
+      book => book.googleKey === googleKey
     );
-
     API.saveBook({
-      id: book.id,
+      googleKey: book.volumeInfo.googleKey,
       title: book.volumeInfo.title,
       authors: book.volumeInfo.authors,
       description: book.volumeInfo.description,
@@ -78,13 +79,13 @@ class Search extends Component {
                 {this.state.books.map(book => {
                   return (
                     <BookListItem
-                      key={book.id}
+                      key={book.googleKey}
                       title={book.title}
                       authors={book.authors}
                       description={book.description}
                       image={book.image}
                       link={book.link}
-                      Button={() => (<button onClick={() => this.handleSaveBook(book.id)}
+                      Button={() => (<button onClick={() => this.handleSaveBook(book.googleKey)}
                       className="btn save-button">Save</button>)}
                     />
                   );

@@ -1,5 +1,5 @@
 const axios = require("axios");
-// const db = require("../models");
+const db = require("../models");
 
 // Define methods for googleController
 
@@ -10,7 +10,9 @@ module.exports = {
         axios
         .get('https://www.googleapis.com/books/v1/volumes?q=' + params.title + '&printType=books&_limit=10')
         .then(results => results.data.items.filter(
-            result => result.volumeInfo.title &&
+            result => 
+                result.id &&
+                result.volumeInfo.title &&
                 result.volumeInfo.authors &&
                 result.volumeInfo.description &&
                 result.volumeInfo.imageLinks.thumbnail &&
@@ -18,6 +20,7 @@ module.exports = {
             )
             .map(result => {
                 return {
+                    googleKey: result.id,
                     title: result.volumeInfo.title,
                     authors: result.volumeInfo.authors,
                     description: result.volumeInfo.description,

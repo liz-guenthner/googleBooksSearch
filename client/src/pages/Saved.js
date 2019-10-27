@@ -5,7 +5,6 @@ import Container from "../components/Container";
 import Row from "../components/Row";
 import BookList from "../components/BookList";
 import BookListItem from "../components/BookListItem";
-// import DeleteBtn from "../components/DeleteBtn";
 
 class Saved extends Component {
   state = {
@@ -53,14 +52,14 @@ class Saved extends Component {
                 {this.state.books.map(book => {
                   return (
                     <BookListItem
-                    key={book.id}
-                    title={book.title}
-                    authors={book.authors}
-                    description={book.description}
-                    image={book.image}
-                    link={book.link}
-                    Button={() => (<button onClick={() => this.handleDeleteBook(book.id)}
-                      className="btn delete-button">Delete</button>)}
+                      key={book._id}
+                      title={book.title}
+                      authors={book.authors}
+                      description={book.description}
+                      image={book.image}
+                      link={book.link}
+                      Button={() => (<button onClick={() => this.handleDeleteBook(book._id)}
+                        className="btn delete-button">Delete</button>)}
                     />
                   );
                 })}
