@@ -33,7 +33,7 @@ class Search extends Component {
   handleFormSubmit = event => {
     event.preventDefault();
 
-    API.getAllBooks(this.state.booksSearch)
+    API.getSearchedBooks(this.state.booksSearch)
       .then(res => {
         if (res.data.status === "error") {
           throw new Error(res.data.message);

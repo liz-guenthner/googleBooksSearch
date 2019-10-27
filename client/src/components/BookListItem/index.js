@@ -7,7 +7,7 @@ import Container from "../Container";
 
 // BookListItem renders a list item containing data from the book api call
 function BookListItem (props) {
-
+  console.log(props);
   return (
     <li className="list-group-item">
       <Container>

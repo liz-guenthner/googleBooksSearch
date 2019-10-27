@@ -4,10 +4,8 @@ import axios from "axios";
 // It accepts a "query" or term to search the recipe api for
 export default {
   // get all the books after searching google books API
-  getAllBooks: function(booksSearch) {
-    return axios.get("/api/google/googleSearch/", { 
-      params: { booksSearch }
-    });
+  getSearchedBooks: function(booksSearch) {
+    return axios.get("/api/google/googleSearch/" + booksSearch);
   },
   // get books saved to db
   getSavedBooks: function() {

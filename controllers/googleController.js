@@ -5,18 +5,29 @@ const axios = require("axios");
 
 module.exports = {
     getSearchedBooks: function(req, res) {
-
+        console.log(req.params);
         // axios call to find all books in google books search using parameter in query
         const { params } = req;
         axios
-        .get('https://www.googleapis.com/books/v1/volumes?q=' + params.booksSearch + '&printType=books&_limit=10')
+        .get('https://www.googleapis.com/books/v1/volumes?q=' + params.title + '&printType=books&_limit=10')
         .then(results => results.data.items.filter(
             result => result.volumeInfo.title &&
                 result.volumeInfo.authors &&
                 result.volumeInfo.description &&
                 result.volumeInfo.imageLinks.thumbnail &&
                 result.volumeInfo.previewLink
-        ))
+            )
+            .map(result => {
+                return {
+                    // key={id}
+                    title: result.volumeInfo.title,
+                    authors: result.volumeInfo.authors,
+                    description: result.volumeInfo.description,
+                    image: result.volumeInfo.imageLinks.thumbnail,
+                    link: result.volumeInfo.previewLink
+                }
+            })
+        )
         .then(results => res.json(results))
         .catch(err => res.status(422).json(err));
     }
