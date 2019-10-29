@@ -9,10 +9,11 @@ import BookListItem from "../components/BookListItem";
 
 
 class Search extends Component {
+
   state = {
     books: [],
-    booksSearch: ""
-    // text: "Save"
+    booksSearch: "",
+    text: "Save"
   }
 
   handleInputChange = event => {
@@ -37,9 +38,11 @@ class Search extends Component {
       });
   };
 
-  handleSaveBook = book => {
+  handleSaveBook = (book) => {
     API.saveBook(book);
-    // this.setState({ text: "Saved" }); 
+    this.setState({
+      text: "Saved"
+    });
   }
 
   render() {
@@ -76,7 +79,7 @@ class Search extends Component {
                       image={book.image}
                       link={book.link}
                       Button={() => (<button onClick={() => this.handleSaveBook(book)}
-                      className="btn save-button">Save</button>)}
+                      className="btn save-button">{this.state.text}</button>)}
                     />
                   );
                 })}
