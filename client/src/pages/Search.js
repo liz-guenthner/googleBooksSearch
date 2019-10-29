@@ -12,7 +12,8 @@ class Search extends Component {
   state = {
     books: [],
     booksSearch: ""
-  };
+    // text: "Save"
+  }
 
   handleInputChange = event => {
     const { name, value } = event.target;
@@ -28,7 +29,6 @@ class Search extends Component {
           throw new Error(res.data.message);
         }
         this.setState({ books: res.data });
-        console.log(res.data);
       })
       .catch((err) => {
         this.setState({ 
@@ -37,19 +37,9 @@ class Search extends Component {
       });
   };
 
-  handleSaveBook = googleKey => {
-    console.log(googleKey);
-    const book = this.state.books.find(
-      book => book.googleKey === googleKey
-    );
-    API.saveBook({
-      googleKey: book.volumeInfo.googleKey,
-      title: book.volumeInfo.title,
-      authors: book.volumeInfo.authors,
-      description: book.volumeInfo.description,
-      image: book.volumeInfo.imageLinks.thumbnail,
-      link: book.volumeInfo.previewLink
-    }).then(() => this.getBooks());
+  handleSaveBook = book => {
+    API.saveBook(book);
+    // this.setState({ text: "Saved" }); 
   }
 
   render() {
@@ -76,16 +66,16 @@ class Search extends Component {
               <div></div>
             ) : (
               <BookList>
-                {this.state.books.map(book => {
+                {this.state.books.map((book, index) => {
                   return (
                     <BookListItem
-                      key={book.googleKey}
+                      key={index}
                       title={book.title}
                       authors={book.authors}
                       description={book.description}
                       image={book.image}
                       link={book.link}
-                      Button={() => (<button onClick={() => this.handleSaveBook(book.googleKey)}
+                      Button={() => (<button onClick={() => this.handleSaveBook(book)}
                       className="btn save-button">Save</button>)}
                     />
                   );

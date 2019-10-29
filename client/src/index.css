@@ -30,3 +30,18 @@ li.list-group-item {
   text-decoration: none;
   color: #ffffff;
 }
+
+.delete-button {
+  float: right;
+  color: #ffffff;
+  background-color: red;
+  padding: .375rem .75rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  border-radius: .25rem;
+}
+.delete-button:hover {
+  filter: brightness(80%);
+  text-decoration: none;
+  color: #ffffff;
+}

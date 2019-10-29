@@ -22,7 +22,7 @@ module.exports = {
                 return {
                     googleKey: result.id,
                     title: result.volumeInfo.title,
-                    authors: result.volumeInfo.authors,
+                    authors: (result.volumeInfo.authors).join(", "),
                     description: result.volumeInfo.description,
                     image: result.volumeInfo.imageLinks.thumbnail,
                     link: result.volumeInfo.previewLink

@@ -27,12 +27,11 @@ class Saved extends Component {
       .catch(err => console.log(err));
   };
 
-  handleDeleteBook = id => {
-    const bookObjects = this.state.books;
-    API.deleteBook(id)
-    .then(res => this.getSavedBooks())
-    .then(res => this.setState( {books: bookObjects }));
+  handleDeleteBook = (id) => {
+    console.log(id);
+    API.deleteBook(id).then(res => this.getSavedBooks());
   };
+ 
 
   render() {
 
@@ -47,7 +46,7 @@ class Saved extends Component {
             <h3>Here are your saved books!</h3>
           </Row>
           <Row>
-            {!this.state.books.length ? (
+            {this.state.books.length ? (
               <BookList>
                 {this.state.books.map(book => {
                   return (
