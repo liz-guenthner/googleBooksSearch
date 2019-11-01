@@ -1,11 +1,20 @@
-import React from "react";
+import React, {Component} from "react";
 import Row from "../Row";
 import "./style.css";
 import Container from "../Container";
 
 // BookListItem renders a list item containing data from the book api call
-function BookListItem ({title, authors, link, description, image, Button}) {
+class BookListItem extends Component {
+  state = {
+    text: "Save"
+  }
+  HandleSave = () => {
+    this.setState({text: "Saved"});
+    this.props.HandleClick();
+  }
 
+  render() {
+    const {title, authors, link, description, image, isDelete, HandleClick} = this.props;
   return (
     <li className="list-group-item">
       <Container>
@@ -15,7 +24,11 @@ function BookListItem ({title, authors, link, description, image, Button}) {
               <p className="book-authors"><span>Authors: </span>{authors}</p>
             </div>
             <div className="book-buttons">
-              <Button />
+              {!isDelete ? (
+                <button id="saveBtn" onClick={this.HandleSave}>{this.state.text}</button>
+              ) : (
+                <button id="deleteBtn"onClick={HandleClick}>Delete</button>
+              )}
               <a className="view-link btn" rel="noreferrer noopener" target="_blank" href={link}>
                 View
               </a>
@@ -28,6 +41,7 @@ function BookListItem ({title, authors, link, description, image, Button}) {
       </Container>
     </li>
   );
+  }
 }
 
 export default BookListItem;

@@ -12,8 +12,7 @@ class Search extends Component {
 
   state = {
     books: [],
-    booksSearch: "",
-    text: "Save"
+    booksSearch: ""
   }
 
   handleInputChange = event => {
@@ -40,9 +39,6 @@ class Search extends Component {
 
   handleSaveBook = (book) => {
     API.saveBook(book);
-    this.setState({
-      text: "Saved"
-    });
   }
 
   render() {
@@ -78,8 +74,8 @@ class Search extends Component {
                       description={book.description}
                       image={book.image}
                       link={book.link}
-                      Button={() => (<button onClick={() => this.handleSaveBook(book)}
-                      className="btn save-button">{this.state.text}</button>)}
+                      HandleClick={() => this.handleSaveBook(book)}
+                      isDelete={false}
                     />
                   );
                 })}

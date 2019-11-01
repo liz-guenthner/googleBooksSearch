@@ -13,7 +13,7 @@ export default {
   },
   // delete a book saved to db
   deleteBook: function(id) {
-    return axios.delete("api/books" + id);
+    return axios.delete("api/books/" + id);
   },
   // save a book to db
   saveBook: function(book) {

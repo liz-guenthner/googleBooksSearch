@@ -57,8 +57,8 @@ class Saved extends Component {
                       description={book.description}
                       image={book.image}
                       link={book.link}
-                      Button={() => (<button onClick={() => this.handleDeleteBook(book._id)}
-                        className="btn delete-button">Delete</button>)}
+                      HandleClick={() => this.handleDeleteBook(book._id)}
+                      isDelete={true}
                     />
                   );
                 })}
