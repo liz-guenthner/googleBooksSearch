@@ -32,5 +32,9 @@
     "react-dom": "^16.10.2",
     "react-router-dom": "^5.1.2",
     "update-mongo": "0.0.4"
+  },
+  "production": {
+    "use_env_variable": "MONGODB_URI",
+    "dialect": "mongodb"
   }
 }
